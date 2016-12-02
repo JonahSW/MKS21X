@@ -1,26 +1,27 @@
-abstract Class LibraryBook extends Book implements Comparable<LibraryBook>{
+public abstract class LibraryBook extends Book implements Comparable<LibraryBook>{
     String callNumber;
 
     //null constructor
-    private LibraryBook();
+    public LibraryBook(){
+    }
 
     //LibraryBook Constructor
-    private LibraryBook(String author, String title, String isbn, String callNumber){
-	this.author = author;
-	this.title = title;
-	this.isbn = isbn;
-	this.callNumber = callNumber;
+    public LibraryBook(String author, String title, String isbn, String callNumber){
+	setAuthor(author);
+	setTitle(title);
+	setISBN(isbn);
+	setCallNumber(callNumber);
     }
 
     //METHODS
 
     //get method for callNumber
-    private String callNumber(){
+    public String callNumber(){
 	return callNumber;
     }
 
     //set method for callNumber, returns original value for callNumber
-    private String setCallNumber(String newCallNumber){
+    public String setCallNumber(String newCallNumber){
 	String temp = newCallNumber;
 	callNumber = newCallNumber;
 
@@ -28,7 +29,7 @@ abstract Class LibraryBook extends Book implements Comparable<LibraryBook>{
     }
 
     //toString method for LibraryBook
-    private String toString(){
+    public String toString(){
 	return super.toString() + '\n' + "Call Number: " + callNumber;
     }
 
@@ -38,6 +39,5 @@ abstract Class LibraryBook extends Book implements Comparable<LibraryBook>{
     abstract void checkout(String patron, String due);
     abstract void returned();
     abstract String circulationStatus();
-
-    
+ 
 }

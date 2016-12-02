@@ -2,7 +2,7 @@ Class ReferenceBook extends LibraryBook{
     String collection;
 
     //ReferenceBook constructor
-    private ReferenceBook(String author, String title, String isbn, String callNumber, String collection){
+    public ReferenceBook(String author, String title, String isbn, String callNumber, String collection){
 	this.author = author;
 	this.title = title;
 	this.isbn = isbn;
@@ -27,8 +27,8 @@ Class ReferenceBook extends LibraryBook{
 	return temp;
     }
 
-    //toString method for LibraryBook
-    private String toString(){
+    //toString method for ReferenceBook
+    public String toString(){
 	return super.toString() + '\n' + "Collection: " + collection;
     }
 

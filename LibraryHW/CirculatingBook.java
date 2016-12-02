@@ -1,7 +1,6 @@
 Class CirculatingBook extends LibraryBook{
     private String currentHolder;
     private String dueDate;
-    private boolean out;
 
     //CirculatingBook constructor
     private CirculatingBook(String author, String title, String isbn, String callNumber, Strign currentHolder, String dueDate){
@@ -9,7 +8,6 @@ Class CirculatingBook extends LibraryBook{
 	this.title = title;
 	this.isbn = isbn;
 	this.callNumber = callNumber;
-	boolean out = false;
     }
 
     //METHODS
@@ -39,19 +37,9 @@ Class CirculatingBook extends LibraryBook{
 
 	return temp;
     }
-
-    //get method for out
-    private boolean out(){
-	return out;
-    }
-    //set method for out
-    private void out(boolean new){
-	out = new;
-	
-    }
     
     //toString method for CirculatingBook
-    private String toString(){
+    public String toString(){
 	return super.toString() + '\n' + "Current Holder: " + currentHolder + '\n' + "Due Date: " + dueDate;
     }
 
@@ -59,14 +47,12 @@ Class CirculatingBook extends LibraryBook{
     private void checkout(String patron, String due){
 	setCurrentHolder = patron;
 	setDueDate = due;
-	out = true;
     }
 
     //handles process when a book is returned (currentHolder and dueDate are set to null)
     private void returned(){
 	setCurrentHolder = new String;
 	setDueDate = new String;
-	out = false;
     }
 
     //should return the currentHolder's name and due date, if the book has been checked out; or "book available on shelves" if the book is available.

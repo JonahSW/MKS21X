@@ -6,11 +6,11 @@ public class Book{
     private String isbn;
 
     //null constructor
-    private Book(){
+    public Book(){
     }
 
     //constructor accepts parameters
-    private Book(String author, String title, String isbn){
+    public Book(String author, String title, String isbn){
 	this.author = author;
 	this.title = title;
 	this.isbn = isbn;
@@ -19,21 +19,21 @@ public class Book{
     //METHODS
     
     //get method for author
-    private String author(){
+    public String author(){
 	return author;
     }
 
     //get method for title
-    private String title(){
+    public String title(){
 	return title;
     }
     //get method for isbn
-    private String isbn(){
+    public String isbn(){
 	return isbn;
     }
 
     //set method for author, returns original value for author
-    private String setAuthor(String newAuthor){
+    public  String setAuthor(String newAuthor){
 	String temp = author;
 	author = newAuthor;
 
@@ -41,7 +41,7 @@ public class Book{
     }
 
     //set method for title, returns original value for title
-    private String setTitle(String newTitle){
+    public String setTitle(String newTitle){
 	String temp = title;
 	title = newTitle;
 
@@ -49,7 +49,7 @@ public class Book{
     }
 
     //set method for isbn, returns original value for isbn
-    private String setISBN(String newISBN){
+    public String setISBN(String newISBN){
 	String temp = isbn;
 	isbn = newISBN;
 
@@ -57,7 +57,7 @@ public class Book{
     }
 
     //toString method for Book
-    private String toString(){
+    public String toString(){
 	return "Title: " + title + '\n' + "Author: " + author + '\n' + "ISBN: " + isbn;
     }
 
