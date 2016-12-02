@@ -10,8 +10,8 @@ Class ReferenceBook extends LibraryBook{
 	this.collection = collection;
     }
 
-    //METHODS
-
+    //Primary METHODS
+    
     //get method for collection
     private String collection(){
 	return collection;
