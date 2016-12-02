@@ -16,7 +16,6 @@ Class ReferenceBook extends LibraryBook{
     private String collection(){
 	return collection;
     }
-
     
 
     //set method for collection, returns original value for collection
