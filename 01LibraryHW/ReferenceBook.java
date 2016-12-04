@@ -1,11 +1,11 @@
-Class ReferenceBook extends LibraryBook{
+public class ReferenceBook extends LibraryBook{
     String collection;
 
     //ReferenceBook constructor
     public ReferenceBook(String author, String title, String isbn, String callNumber, String collection){
-	this.author = author;
-	this.title = title;
-	this.isbn = isbn;
+	setAuthor(author);
+	setTitle(author);
+	setISBN(isbn);
 	this.callNumber = callNumber;
 	this.collection = collection;
     }
@@ -13,13 +13,13 @@ Class ReferenceBook extends LibraryBook{
     //METHODS
     
     //get method for collection
-    private String collection(){
+    public String collection(){
 	return collection;
     }
     
 
     //set method for collection, returns original value for collection
-    private String setCollection(String newCollection){
+    public String setCollection(String newCollection){
 	String temp = newCollection;
 	collection = newCollection;
 
@@ -32,18 +32,19 @@ Class ReferenceBook extends LibraryBook{
     }
 
     //tells the user they cannot check out a reference book
-    private void checkout(){
+    public void checkout(String patron, String checkout){
 	System.out.println("You cannot check out a reference book!");
     }
 
     //tells teh user a reference book cannot be returned
-    private void returned(){
+    public void returned(){
 	System.out.println("This reference book could not have been checked out -- return is impossible");
     }
 
     //tells the user the book's circulation status
-    private String circulationStatus(){
+    public String circulationStatus(){
 	System.out.println("Non-circulating reference book.");
+	return "";
     }
 
 

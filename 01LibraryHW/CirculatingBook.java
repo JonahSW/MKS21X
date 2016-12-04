@@ -1,13 +1,11 @@
-Class CirculatingBook extends LibraryBook{
+public class CirculatingBook extends LibraryBook{
     private String currentHolder;
     private String dueDate;
 
     //CirculatingBook constructor
-    private CirculatingBook(String author, String title, String isbn, String callNumber, Strign currentHolder, String dueDate){
-	this.author = author;
-	this.title = title;
-	this.isbn = isbn;
-	this.callNumber = callNumber;
+    public CirculatingBook(String author, String title, String isbn, String callNumber, String currentHolder, String dueDate){
+	this.currentHolder = currentHolder;
+	this.dueDate = dueDate;
     }
 
     //METHODS
@@ -44,24 +42,27 @@ Class CirculatingBook extends LibraryBook{
     }
 
     //handles processing when a book is checked out, storing the patron's name and the date the book is due in the fields.
-    private void checkout(String patron, String due){
-	setCurrentHolder = patron;
-	setDueDate = due;
+    public void checkout(String patron, String due){
+	currentHolder = patron;
+	dueDate = due;
     }
 
     //handles process when a book is returned (currentHolder and dueDate are set to null)
-    private void returned(){
-	setCurrentHolder = new String;
-	setDueDate = new String;
+    public void returned(){
+	setCurrentHolder(null);
+	setDueDate(null);
     }
 
     //should return the currentHolder's name and due date, if the book has been checked out; or "book available on shelves" if the book is available.
-    private String circulationStatus()
-
-
-
-
-
+    public String circulationStatus(){
+	if(currentHolder() == null){
+	    System.out.println("Current Holder: " + currentHolder() + "Due Date :" + dueDate());
+	    return null;
+	}
+	else{
+	    return "Book available on shelves";
+	}
+    }
 
 
 
