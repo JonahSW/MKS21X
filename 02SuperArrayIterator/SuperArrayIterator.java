@@ -1,18 +1,33 @@
-import java.util.iterator;
+import java.util.Iterator;
 
 public class SuperArrayIterator implements Iterator<String>{
-
-
+    public int counter;
+    public StringySuperArray supry;
+    
+    //constructor to initialize state of iterator
+    public SuperArrayIterator(){
+	counter = 0;
+    }
+    
     //hasNext function:
     public boolean hasNext(){
-	int i = 0;
-	if(i < size() - 1){
+	if(counter < supry.size() - 1){
+	return true;
 	}
+
+	return false;
     }
 
     //next function:
     public String next(){
+	String temp = supry.data(counter);
+	counter++;
+	return temp;
+    }
 
+    //remove function (UNSUPPORTED)
+    public void remove(){
+	throw new UnsupportedOperationException();
     }
 
 }

@@ -5,7 +5,7 @@
 //I don't lose track of the output of a series of tests if there are a lot
 //of function calls, and it is easier to troubleshoot
 
-public class StringySuperArray{
+public class StringySuperArray implements Iterable<String>{
     private String[] data;
     private int size;
 
@@ -28,6 +28,11 @@ public class StringySuperArray{
 	if (initCap < 0){
 	    throw new IllegalArgumentException();
 	}
+    }
+
+    //ITERATOR METHOD
+    public SuperArrayIterator iterator(){
+	return new SuperArrayIterator();
     }
 
     //ACCESSORS
@@ -90,6 +95,9 @@ public class StringySuperArray{
 	}
 
        	data[size] = str;
+	if(data[size] == str){
+	    a = true;
+	}
 	
 	return a;
     }
