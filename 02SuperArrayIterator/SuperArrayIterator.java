@@ -11,8 +11,10 @@ public class SuperArrayIterator implements Iterator<String>{
     
     //hasNext function:
     public boolean hasNext(){
+	System.out.println(supry.size());
 	if(counter < supry.size() - 1){
-	return true;
+	    System.out.println("I like to cause problems");
+	    return true;
 	}
 
 	return false;

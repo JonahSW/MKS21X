@@ -89,15 +89,20 @@ public class StringySuperArray implements Iterable<String>{
      *And will resize the SuperArray if needed.*/
     public boolean add(String str){
 	boolean a = false;
+	//System.out.println("I cause problems");
 	
 	if(size == length()){
 	    grow();
 	}
 
        	data[size] = str;
+	
+	
 	if(data[size] == str){
 	    a = true;
 	}
+
+	size++;
 	
 	return a;
     }
