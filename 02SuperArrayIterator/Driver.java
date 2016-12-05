@@ -1,13 +1,13 @@
 public class Driver{
   public static void main(String[] args) {
-    StringySuperArray data1 = new StringySuperArray();
+      //StringySuperArray data1 = new StringySuperArray();
     StringySuperArray data = new StringySuperArray(5);
 
-    System.out.println(data1.toStringDebug());
+    //System.out.println(data1.toStringDebug());
     System.out.println(data.toStringDebug());
 
-    data1.add("hi");
-    data.add("hi");
+    // data1.add("hi");
+    //data.add("hi");
     
     int i = 0;
     while(i < 26){
@@ -20,11 +20,11 @@ public class Driver{
     
     //System.out.println(data1.add("wfd"));
 
-    //System.out.println(data1.size());
+    //System.out.println(data.size());
     
-    //System.out.println(data1.get(0));
+    //System.out.println(data.get(10));
 
-    System.out.println(data.toStringDebug());
+    //System.out.println(data.toStringDebug());
 
     System.out.println(data);
     System.out.println("Standard loop:");
@@ -41,7 +41,6 @@ public class Driver{
     //}
     
     for(String s : data){
-	
       System.out.print(s+" ");
     }
   }

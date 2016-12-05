@@ -28,6 +28,7 @@ public class StringySuperArray implements Iterable<String>{
 	if (initCap < 0){
 	    throw new IllegalArgumentException();
 	}
+	//size = 0;
     }
 
     //ITERATOR METHOD
