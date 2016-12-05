@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class Driver{
   public static void main(String[] args) {
       //StringySuperArray data1 = new StringySuperArray();
@@ -35,10 +37,6 @@ public class Driver{
     
     System.out.println();
     System.out.println("for-each loop:");
-
-    //while(data.hasNext()){
-    //	System.out.println(data.next());
-    //}
     
     for(String s : data){
       System.out.print(s+" ");

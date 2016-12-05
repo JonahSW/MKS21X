@@ -33,7 +33,7 @@ public class StringySuperArray implements Iterable<String>{
 
     //ITERATOR METHOD
     public SuperArrayIterator iterator(){
-	return new SuperArrayIterator();
+	return new SuperArrayIterator(this);
     }
 
     //ACCESSORS
