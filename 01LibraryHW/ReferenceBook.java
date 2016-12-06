@@ -4,7 +4,7 @@ public class ReferenceBook extends LibraryBook{
     //ReferenceBook constructor
     public ReferenceBook(String author, String title, String isbn, String callNumber, String collection){
 	setAuthor(author);
-	setTitle(author);
+	setTitle(title);
 	setISBN(isbn);
 	this.callNumber = callNumber;
 	this.collection = collection;

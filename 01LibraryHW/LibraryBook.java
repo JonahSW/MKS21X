@@ -36,15 +36,16 @@ public abstract class LibraryBook extends Book implements Comparable<LibraryBook
     //compareTo allows comparison/ordering of library books by callNumber, following the format of Java's Comparable interface
     //returns -2 if nothing else works
     public int compareTo(LibraryBook book){
-	if(this.callNumber.compareTo(book.callNumber) == 0){
+	//System.out.println("hi");
+	if(callNumber.compareTo(book.callNumber) == 0){
 	    return 0;
 	}
 	
-	if(this.callNumber.compareTo(book.callNumber) < 0){
+	if(callNumber.compareTo(book.callNumber) < 0){
 	    return -1;
 	}
 
-	if(this.callNumber.compareTo(book.callNumber) > 0){
+	if(callNumber.compareTo(book.callNumber) > 0){
 	    return 1;
 	}
 

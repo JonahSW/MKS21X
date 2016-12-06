@@ -1,18 +1,21 @@
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class Library {
-	ArrayList<LibraryBook> bookList;
-  public Library () {
-		bookList = new ArrayList<LibraryBook> ();
-	}
+    ArrayList<LibraryBook> bookList;
+    public Library(){
+	bookList = new ArrayList<LibraryBook> ();
+    }
+    
+    /**
+     * adds the given book to the library
+     * @param book
+     */
+    public void addBook (LibraryBook book) {
+	bookList.add(book);
+    }
 
-	/**
-	 * adds the given book to the library
-	 * @param book
-	 */
-	public void addBook (LibraryBook book) {
-		bookList.add(book);
-	}
+    
 
 	/**
 	 * prints all books in the library
@@ -77,15 +80,19 @@ public class Library {
 	 * main testing program
 	 * @param args  not used
 	 */
-	public static void main (String args[]) {
+    public static void main (String args[]) {
 
-		Library lib = new Library ();
+	//System.out.println("hi");
+	    
+	Library lib = new Library ();
 
-		// set up library
-		lib.addBook(new ReferenceBook ("Henry M. Walker",
-					"Problems for Computer Solution using BASIC",
-					"0-87626-717-7", "QA76.73.B3W335", "Iowa Room"));
-		lib.addBook(new ReferenceBook ("Samuel A. Rebelsky",
+	//System.out.println("hi");
+
+	// set up library
+	lib.addBook(new ReferenceBook ("Henry M. Walker",
+				       "Problems for Computer Solution using BASIC",
+				       "0-87626-717-7", "QA76.73.B3W335", "Iowa Room"));
+	lib.addBook(new ReferenceBook ("Samuel A. Rebelsky",
 				"Experiments in Java",
 				"0201612674", "64.2 R25ex", "Iowa Room"));
 		lib.addBook(new CirculatingBook ("John David Stone",
@@ -114,9 +121,11 @@ public class Library {
 			    "The Tao of Computing",
 			    "0-86720-206-8", "QA76.W1855"));
 
+		//System.out.println("hi");
 		// sort books by call number
 		lib.sortLibrary();
-
+		//System.out.println("hi");
+		
 		// print library
 		lib.printLibrary();
 

@@ -3,7 +3,11 @@ public class CirculatingBook extends LibraryBook{
     private String dueDate;
 
     //CirculatingBook constructor
-    public CirculatingBook(String author, String title, String isbn, String callNumber, String currentHolder, String dueDate){
+    public CirculatingBook(String author, String title, String isbn, String callNumber){
+	setAuthor(author);
+	setTitle(title);
+	setISBN(isbn);
+	setCallNumber(callNumber);
 	this.currentHolder = currentHolder;
 	this.dueDate = dueDate;
     }
