@@ -8,8 +8,8 @@ public class Barcode implements Comparable<Barcode>{
     // constructors
     //precondtion: _zip.length() = 5 and zip contains only digits.
     //postcondition: throws a runtime exception zip is not the correct length
-    //               or zip contains a non digit
-    //               _zip and _checkDigit are initialized.
+    //or zip contains a non digit
+    //_zip and _checkDigit are initialized.
     public Barcode(String zip){
 
 	//Throws an exception if zip isn't a String of 5 ints 
@@ -42,25 +42,16 @@ public class Barcode implements Comparable<Barcode>{
     
     // postcondition: Creates a copy of a bar code.
     public Barcode clone(){
+	String zipCopy = zip;
+	Barcode copy = new Barcode(zipCopy);
 
+	return copy;
     }
 
 
     // postcondition: computes and returns the check sum for _zip
     private int checkSum(){
 	
-
-    }
-
-    //postcondition: format zip + check digit + Barcode 
-    //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
-    public String toString(){
-
-    }
-
-
-    // postcondition: compares the zip + checkdigit, in numerical order. 
-    public int compareTo(Barcode other){
 
     }
 
@@ -87,5 +78,29 @@ public class Barcode implements Comparable<Barcode>{
     case 9:  code = "|:|::";
 	break;
     }
+    
+    //postcondition: format zip + check digit + Barcode 
+    //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
+    public String toString(){
+	String bar = "";
+
+	for(int p = 0; p < 5; p++){
+	    digit = zip.charAt(p);
+	    bar = bar + digit;
+	}
+
+	digit = checkDigit;
+	bar = bar + digit;
+
+	return bar;
+    }
+
+
+    // postcondition: compares the zip + checkdigit, in numerical order. 
+    public int compareTo(Barcode other){
+
+    }
+
+    
     
 }
