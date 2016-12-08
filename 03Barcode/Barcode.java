@@ -13,7 +13,7 @@ public class Barcode implements Comparable<Barcode>{
     public Barcode(String zip){
 
 	//Throws an exception if zip isn't a String of 5 ints 
-	if((zip.length() != 5) || (zip.checkChar())){
+	if((zip.length() != 5) || checkChar(zip)){
 	    throw new IndexOutOfBoundsException();
 	}
 	
@@ -33,11 +33,11 @@ public class Barcode implements Comparable<Barcode>{
     //checkChar checks for char in zip
     private boolean checkChar(String num){
 	for(int p = 0; p < 5; p++){
-	    if(isDigit(num.charAt(p))){
-		return true;
+	    if(Character.isDigit(num.charAt(p))){
+		return false;
 	    }
 	}
-	return false;
+	return true;
     }
     
     // postcondition: Creates a copy of a bar code.
@@ -52,38 +52,40 @@ public class Barcode implements Comparable<Barcode>{
     // postcondition: computes and returns the check sum for _zip
     private int checkSum(){
 	
-
+	return -1;
     }
 
-    //Switch Block
-    switch(digit){
-    case 0:  code = "||:::";
-	break;
-    case 1:  code = ":::||";
-	break;
-    case 2:  code = "::|:|";
-	break;
-    case 3:  code = "::||:";
-	break;
-    case 4:  code = ":|::|";
-	break;
-    case 5:  code = ":|:|:";
-	break;
-    case 6:  code = ":||::";
-	break;
-    case 7:  code = "|:::|";
-	break;
-    case 8:  code = "|::|:";
-	break;
-    case 9:  code = "|:|::";
-	break;
-    }
+   
     
     //postcondition: format zip + check digit + Barcode 
     //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
     public String toString(){
 	String bar = "";
 
+	//Switch Block
+	switch(digit){
+	case 0:  code = "||:::";
+	    break;
+	case 1:  code = ":::||";
+	    break;
+	case 2:  code = "::|:|";
+	    break;
+	case 3:  code = "::||:";
+	    break;
+	case 4:  code = ":|::|";
+	    break;
+	case 5:  code = ":|:|:";
+	    break;
+	case 6:  code = ":||::";
+	    break;
+	case 7:  code = "|:::|";
+	    break;
+	case 8:  code = "|::|:";
+	    break;
+	case 9:  code = "|:|::";
+	    break;
+	}
+	
 	for(int p = 0; p < 5; p++){
 	    digit = zip.charAt(p);
 	    bar = bar + digit;
@@ -92,6 +94,8 @@ public class Barcode implements Comparable<Barcode>{
 	digit = checkDigit;
 	bar = bar + digit;
 
+	System.out.println(bar);
+	
 	return bar;
     }
 
@@ -99,7 +103,21 @@ public class Barcode implements Comparable<Barcode>{
     // postcondition: compares the zip + checkdigit, in numerical order. 
     public int compareTo(Barcode other){
 
+	return -1;
     }
 
+    //MAIN
+
+    public static void main(String[]args){
+	Barcode barcode1 = new Barcode("01234");
+
+	barcode1.toString();
+
+
+
+
+
+	
+    }
     
 }
