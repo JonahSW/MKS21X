@@ -1,7 +1,7 @@
 public class Barcode implements Comparable<Barcode>{
     // instance variables
-    private String _zip;
-    private int _checkDigit;
+    private String zip;
+    private int checkDigit;
     private int digit;
     private String code;
 
@@ -11,10 +11,35 @@ public class Barcode implements Comparable<Barcode>{
     //               or zip contains a non digit
     //               _zip and _checkDigit are initialized.
     public Barcode(String zip){
-	this.zip = zip;
+
+	//Throws an exception if zip isn't a String of 5 ints 
+	if((zip.length() != 5) || (zip.checkChar())){
+	    throw new IndexOutOfBoundsException();
+	}
 	
+	this.zip = zip;
+	checkDigit = sumDigit(zip) % 10;
     }
 
+    //sumDigit helper method (sums the digits in zip)
+    private int sumDigit(String num){
+	int sum = 0;
+	for(int p = 0; p < 5; p++){
+	    sum = sum + num.charAt(p);
+	}
+	return sum;
+    }
+
+    //checkChar checks for char in zip
+    private boolean checkChar(String num){
+	for(int p = 0; p < 5; p++){
+	    if(isDigit(num.charAt(p))){
+		return true;
+	    }
+	}
+	return false;
+    }
+    
     // postcondition: Creates a copy of a bar code.
     public Barcode clone(){
 
@@ -23,6 +48,7 @@ public class Barcode implements Comparable<Barcode>{
 
     // postcondition: computes and returns the check sum for _zip
     private int checkSum(){
+	
 
     }
 
