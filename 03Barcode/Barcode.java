@@ -2,7 +2,7 @@ public class Barcode implements Comparable<Barcode>{
     // instance variables
     private String zip;
     private int checkDigit;
-    private int digit;
+    private char digit;
     private String code;
 
     // constructors
@@ -18,16 +18,7 @@ public class Barcode implements Comparable<Barcode>{
 	}
 	
 	this.zip = zip;
-	checkDigit = sumDigit(zip) % 10;
-    }
-
-    //sumDigit helper method (sums the digits in zip)
-    private int sumDigit(String num){
-	int sum = 0;
-	for(int p = 0; p < 5; p++){
-	    sum = sum + num.charAt(p);
-	}
-	return sum;
+	checkDigit = checkSum() % 10;
     }
 
     //checkChar checks for char in zip
@@ -51,8 +42,11 @@ public class Barcode implements Comparable<Barcode>{
 
     // postcondition: computes and returns the check sum for _zip
     private int checkSum(){
-	
-	return -1;
+	int sum = 0;
+	for(int p = 0; p < 5; p++){
+	    sum = sum + Integer.parseInt(zip.substring(p, p + 1));
+	}
+	return sum;
     }
 
    
@@ -61,38 +55,49 @@ public class Barcode implements Comparable<Barcode>{
     //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
     public String toString(){
 	String bar = "";
+	String code = "";
 
 	//Switch Block
 	switch(digit){
-	case 0:  code = "||:::";
+	    //default: throw new NumberFormatException();
+	case '0':
+	    //System.out.println("hi");
+	    code = "||:::";
 	    break;
-	case 1:  code = ":::||";
+	case '1':  code = ":::||";
 	    break;
-	case 2:  code = "::|:|";
+	case '2':  code = "::|:|";
 	    break;
-	case 3:  code = "::||:";
+	case '3':  code = "::||:";
 	    break;
-	case 4:  code = ":|::|";
+	case '4':  code = ":|::|";
 	    break;
-	case 5:  code = ":|:|:";
+	case '5':  code = ":|:|:";
 	    break;
-	case 6:  code = ":||::";
+	case '6':  code = ":||::";
 	    break;
-	case 7:  code = "|:::|";
+	case '7':  code = "|:::|";
 	    break;
-	case 8:  code = "|::|:";
+	case '8':  code = "|::|:";
 	    break;
-	case 9:  code = "|:|::";
+	case '9':  code = "|:|::";
 	    break;
+	    //default: throw new NumberFormatException();
 	}
 	
 	for(int p = 0; p < 5; p++){
 	    digit = zip.charAt(p);
-	    bar = bar + digit;
+	    bar = bar + code;
 	}
 
-	digit = checkDigit;
-	bar = bar + digit;
+	if(checkDigit == 0){
+	    digit = '0';
+	}
+	else{
+	    digit = (char)checkDigit;
+	}
+	
+	bar = bar + code;
 
 	System.out.println(bar);
 	
@@ -111,6 +116,9 @@ public class Barcode implements Comparable<Barcode>{
     public static void main(String[]args){
 	Barcode barcode1 = new Barcode("01234");
 
+	System.out.println(barcode1.checkSum());
+	System.out.println(barcode1.checkSum());
+	
 	barcode1.toString();
 
 
