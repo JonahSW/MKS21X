@@ -19,7 +19,7 @@ public class Barcode implements Comparable<Barcode>{
 	checkChar(zip);
 	
 	this.zip = zip;
-	checkDigit = sumDigit() % 10;
+	checkDigit = checkSum();
     }
 
     //get method for checkdigit
@@ -31,17 +31,31 @@ public class Barcode implements Comparable<Barcode>{
 	return zip;
     }
 
-    //sumDigit returns the sum of all the digits of the zip
-    private int sumDigit(){
+    //sumDigit sums the digits of a 5 char string
+    private static int sumDigit(String zip){
+
+	checkChar(zip);
+	
 	int sum = 0;
 	for(int p = 0; p < 5; p++){
-	    sum = sum + Integer.parseInt(zip.substring(p, p + 1));
+	    sum = sum + Integer.parseInt(zip);
 	}
+
 	return sum;
+    }
+
+    //checkDigitChecker returns true if the zip and checkdigit match
+    private static boolean checkDigitChecker(String code){
+        
+	if(sumDigit(code) == Integer.parseInt(code.charAt(5))){
+	    return true;
+	}
+
+	return false;
     }
     
     //checkChar checks for chars in zip, throws an exception if it finds one
-    private void checkChar(String num){
+    private static void checkChar(String num){
 	for(int p = 0; p < 5; p++){
 	    if(!Character.isDigit(num.charAt(p))){
 		throw new IllegalArgumentException("zip must contain only ints");
@@ -58,25 +72,23 @@ public class Barcode implements Comparable<Barcode>{
     }
 
 
-    // postcondition: computes and returns the check sum for _zip, ensures zip and checkDigit match
-    private static boolean checkSum(Barcode bc){
-	if(bc.checkDigit() == bc.sumDigit() % 10){
-	    return true;
-	}
-
-	return false;
+    // postcondition: computes and returns the check sum for _zip
+    private static int checkSum(String code){        
+	return sumDigit(code) % 10;
     }
 
 
     //converts a zip string into a barcode      
-    public static String toCode(Barcode code){
+    public static String toCode(String zip){
 	String bar = "";
+	String check = "";
 
 	for(int p = 0; p < 5; p++){
-	    bar = bar + Reference[Integer.parseInt(code.zip().substring(p, p + 1))];
+	    check = bar;
+	    bar = bar + Reference[Integer.parseInt(zip.charAt(p))];
 	}
 
-	bar = bar + Reference[code.checkDigit()];
+	bar = bar + Reference[checkSum(zip)];
 
 	bar = "|" + bar + "|";
 	
@@ -87,7 +99,7 @@ public class Barcode implements Comparable<Barcode>{
     public static String toZip(String code){
 	String bar = "";
 	boolean matched = false;
-
+	
 	for(int p = 1; p < 26; p = p + 5){
 	    for(int i = 0; i < 10; i++){
 		if(code.substring(p, p + 5).equals(Reference[i])){
@@ -98,8 +110,8 @@ public class Barcode implements Comparable<Barcode>{
 	    }
 	}
 
-	if(!matched){
-	    throw new IllegalArgumentException("Bad barcode");
+        if(!checkSum(Integer.parseInt(bar))){
+	    throw new IllegalArgumentException("zip and checksum don't match");
 	}
 
 	return bar;
@@ -108,11 +120,11 @@ public class Barcode implements Comparable<Barcode>{
     //postcondition: format zip + check digit + Barcode 
     //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"
     //prints out a barcode
-    public String toString(Barcode code){
+    public java.lang.String toString(){
 
-	System.out.println(toCode(code));
+	System.out.println(zip + "  " + toCode(code));
 
-	return toCode(code);
+	return zip + "  " + toCode(code);
     }
     
 
@@ -120,7 +132,7 @@ public class Barcode implements Comparable<Barcode>{
     // postcondition: compares the zip + checkdigit, in numerical order. 
     public int compareTo(Barcode other){
 	
-	
+	return -1;
     }
 
     //MAIN
