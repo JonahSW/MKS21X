@@ -15,9 +15,8 @@ public class Barcode implements Comparable<Barcode>{
 	if(zip.length() != 5){
 	    throw new IndexOutOfBoundsException("Arg is wrong length");
 	}
-	if(checkChar(zip)){
-	    throw new IndexOutOfBoundsException("Arg must contain only ints");
-	}
+
+	checkChar(zip);
 	
 	this.zip = zip;
 	checkDigit = sumDigit() % 10;
@@ -26,6 +25,10 @@ public class Barcode implements Comparable<Barcode>{
     //get method for checkdigit
     public int checkDigit(){
 	return checkDigit;
+    }
+    //get method for zip
+    public String zip(){
+	return zip;
     }
 
     //sumDigit returns the sum of all the digits of the zip
@@ -37,14 +40,13 @@ public class Barcode implements Comparable<Barcode>{
 	return sum;
     }
     
-    //checkChar checks for char in zip
-    private boolean checkChar(String num){
+    //checkChar checks for chars in zip, throws an exception if it finds one
+    private void checkChar(String num){
 	for(int p = 0; p < 5; p++){
-	    if(Character.isDigit(num.charAt(p))){
-		return false;
+	    if(!Character.isDigit(num.charAt(p))){
+		throw new IllegalArgumentException("zip must contain only ints");
 	    }
 	}
-	return true;
     }
     
     // postcondition: Creates a copy of a bar code.
@@ -67,14 +69,14 @@ public class Barcode implements Comparable<Barcode>{
 
 
     //converts a zip string into a barcode      
-    public String toCode(){
+    public static String toCode(String zip){
 	String bar = "";
 
 	for(int p = 0; p < 5; p++){
 	    bar = bar + Reference[Integer.parseInt(zip.substring(p, p + 1))];
 	}
 
-	bar = bar + Reference[checkDigit];
+	bar = bar + Reference[checkDigit()];
 
 	bar = "|" + bar + "|";
 	
@@ -82,13 +84,16 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     //converts a barcoe into a zip string
-    public String toZip(String code){
+    public static String toZip(String code){
 	String bar = "";
 
-	for(int p = 1; p < 31; p = p + 5){
+	for(int p = 1; p < 31; p = p + 4){
 	    for(int i = 0; i < 10; i++){
-		if(code.substring(p, p + 4) == Reference[i]){
+		if(code.substring(p, p + 5) == Reference[i]){
 		    bar = bar + i;
+		}
+		else{
+		    throw new IllegalArgumentException("Bad barcode");
 		}
 	    }
 	}
@@ -101,18 +106,10 @@ public class Barcode implements Comparable<Barcode>{
     //prints out a barcode
     public String toStringCode(){
 
-	System.out.println(toCode());
+	System.out.println(toCode(zip));
 
 	return toCode();
     }
-    //prints out a zip from a barcode
-    public String toStringZip(){
-
-	System.out.println(toZip(toCode()));
-
-	return toZip(toCode());
-    }
-
     
 
 
@@ -130,8 +127,8 @@ public class Barcode implements Comparable<Barcode>{
 	System.out.println(checkSum(barcode1));
 	System.out.println(barcode1.sumDigit());
 	System.out.println(barcode1.toStringCode().length());
-	System.out.println(barcode1.toStringZip().length());
 
+	System.out.println(toZip(toCode(zip())));
 	System.out.println("___________________________");
 	
 	Barcode barcode2 = new Barcode("87623");
@@ -139,7 +136,6 @@ public class Barcode implements Comparable<Barcode>{
 	System.out.println(checkSum(barcode2));
 	System.out.println(barcode2.sumDigit());
 	System.out.println(barcode2.toStringCode().length());
-	System.out.println(barcode2.toStringZip().length());
 
 	System.out.println("___________________________");
 	
@@ -148,7 +144,6 @@ public class Barcode implements Comparable<Barcode>{
 	System.out.println(checkSum(barcode3));
 	System.out.println(barcode3.sumDigit());
 	System.out.println(barcode3.toStringCode().length());
-	System.out.println(barcode3.toStringZip().length());
 
 	System.out.println("___________________________");
 
@@ -163,13 +158,12 @@ public class Barcode implements Comparable<Barcode>{
 	System.out.println("___________________________");
 	*/
 
-	Barcode barcode5 = new Barcode("0k93h3");
+	Barcode barcode5 = new Barcode("093h3");
 
 	System.out.println("___________________________");
 	System.out.println(checkSum(barcode5));
 	System.out.println(barcode5.sumDigit());
 	System.out.println(barcode5.toStringCode().length());
-	System.out.println(barcode5.toStringZip().length());
 
 	
     }
