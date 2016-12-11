@@ -47,7 +47,7 @@ public class Barcode implements Comparable<Barcode>{
     //checkDigitChecker returns true if the zip and checkdigit match
     private static boolean checkDigitChecker(String code){
         
-	if(sumDigit(code.substring(0, 5)) == Integer.parseInt(code.substring(5, 5))){
+	if(sumDigit(code.substring(0, 6)) == Integer.parseInt(code.substring(5, 6))){
 	    return true;
 	}
 
@@ -83,7 +83,7 @@ public class Barcode implements Comparable<Barcode>{
 	String bar = "";
 
 	for(int p = 0; p < 5; p++){
-	    bar = bar + Reference[Integer.parseInt(zip.substring(p, p))];
+	    bar = bar + Reference[Integer.parseInt(zip.substring(p, p + 1))];
 	}
 
 	bar = bar + Reference[checkSum(zip)];
@@ -93,23 +93,17 @@ public class Barcode implements Comparable<Barcode>{
 	return bar;
     }
 
-    //converts a barcoe into a zip string
+    //converts a barcode into a zip string
     public static String toZip(String code){
 	String bar = "";
-	boolean matched = false;
 	
 	for(int p = 1; p < 26; p = p + 5){
 	    for(int i = 0; i < 10; i++){
 		if(code.substring(p, p + 5).equals(Reference[i])){
 		    bar = bar + i;
-		    matched = true;
 		}
 		
 	    }
-	}
-
-        if(!checkDigitChecker(bar)){
-	    throw new IllegalArgumentException("zip and checksum don't match");
 	}
 
 	return bar;
@@ -129,8 +123,22 @@ public class Barcode implements Comparable<Barcode>{
 
     // postcondition: compares the zip + checkdigit, in numerical order. 
     public int compareTo(Barcode other){
+	int first = checkSum(zip);
+	int second = checkSum(other.zip());
+
+	if(first == second){
+	    return 0;
+	}
 	
-	return -1;
+	if(first < second){
+	    return -1;
+	}
+
+	if(first > second){
+	    return  1;
+	}
+
+	return 2;
     }
 
     //MAIN
@@ -139,6 +147,30 @@ public class Barcode implements Comparable<Barcode>{
 	Barcode barcode1 = new Barcode("01234");
 
 	barcode1.toString();
+	System.out.println(toZip(toCode(barcode1.zip())));
+	System.out.println(toCode(barcode1.zip()).length());
+	System.out.println("___________________________________");
+
+	Barcode barcode2 = new Barcode("54321");
+
+	barcode2.toString();
+	System.out.println(toZip(toCode(barcode2.zip())));
+	System.out.println("___________________________________");
+
+	Barcode barcode3 = new Barcode("00000");
+
+	barcode3.toString();
+	System.out.println(toZip(toCode(barcode3.zip())));
+	System.out.println("___________________________________");
+
+	Barcode barcode4 = new Barcode("77777");
+
+	barcode4.toString();
+	System.out.println(toZip(toCode(barcode4.zip())));
+	System.out.println("___________________________________");
+
+	System.out.println(barcode2.compareTo(barcode2));
+	System.out.println(barcode4.compareTo(barcode3));
     }
     
 }
