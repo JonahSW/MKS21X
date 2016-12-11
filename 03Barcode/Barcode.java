@@ -19,7 +19,7 @@ public class Barcode implements Comparable<Barcode>{
 	checkChar(zip);
 	
 	this.zip = zip;
-	checkDigit = checkSum();
+	checkDigit = checkSum(zip);
     }
 
     //get method for checkdigit
@@ -47,7 +47,7 @@ public class Barcode implements Comparable<Barcode>{
     //checkDigitChecker returns true if the zip and checkdigit match
     private static boolean checkDigitChecker(String code){
         
-	if(sumDigit(code) == Integer.parseInt(code.charAt(5))){
+	if(sumDigit(code.substring(0, 5)) == Integer.parseInt(code.substring(5, 5))){
 	    return true;
 	}
 
@@ -78,14 +78,12 @@ public class Barcode implements Comparable<Barcode>{
     }
 
 
-    //converts a zip string into a barcode      
+    //converts a zip string of length 5 into a barcode      
     public static String toCode(String zip){
 	String bar = "";
-	String check = "";
 
 	for(int p = 0; p < 5; p++){
-	    check = bar;
-	    bar = bar + Reference[Integer.parseInt(zip.charAt(p))];
+	    bar = bar + Reference[Integer.parseInt(zip.substring(p, p))];
 	}
 
 	bar = bar + Reference[checkSum(zip)];
@@ -110,7 +108,7 @@ public class Barcode implements Comparable<Barcode>{
 	    }
 	}
 
-        if(!checkSum(Integer.parseInt(bar))){
+        if(!checkDigitChecker(bar)){
 	    throw new IllegalArgumentException("zip and checksum don't match");
 	}
 
@@ -122,9 +120,9 @@ public class Barcode implements Comparable<Barcode>{
     //prints out a barcode
     public java.lang.String toString(){
 
-	System.out.println(zip + "  " + toCode(code));
+	System.out.println(zip + "  " + toCode(zip));
 
-	return zip + "  " + toCode(code);
+	return zip + "  " + toCode(zip);
     }
     
 
@@ -140,36 +138,7 @@ public class Barcode implements Comparable<Barcode>{
     public static void main(String[]args){
 	Barcode barcode1 = new Barcode("01234");
 
-	System.out.println(barcode1.zip());
-	System.out.println(checkSum(barcode1));
-	System.out.println(barcode1.sumDigit());
-	System.out.println(barcode1.toString(barcode1).length());
-
-	System.out.println(toCode(barcode1));
-	System.out.println(toZip(toCode(barcode1)));
-	System.out.println("___________________________");
-
-	Barcode barcode2 = new Barcode("00000");
-
-	System.out.println(barcode2.zip());
-	System.out.println(checkSum(barcode2));
-	System.out.println(barcode2.sumDigit());
-	System.out.println(barcode2.toString(barcode1).length());
-
-	System.out.println(toCode(barcode2));
-	System.out.println(toZip(toCode(barcode2)));
-	System.out.println("___________________________");
-
-	Barcode barcode3 = new Barcode("0123g");
-
-	System.out.println(barcode3.zip());
-	System.out.println(checkSum(barcode3));
-	System.out.println(barcode3.sumDigit());
-	System.out.println(barcode3.toString(barcode1).length());
-
-	System.out.println(toCode(barcode3));
-	System.out.println(toZip(toCode(barcode3)));
-	System.out.println("___________________________");
+	barcode1.toString();
     }
     
 }
