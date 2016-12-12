@@ -82,6 +82,13 @@ public class Barcode implements Comparable<Barcode>{
     public static String toCode(String zip){
 	String bar = "";
 
+	//exception throwers
+	if(zip.length() != 5){
+	    throw new IllegalArgumentException("zip is the wrong length");
+	}
+	checkChar(zip);
+	
+
 	for(int p = 0; p < 5; p++){
 	    bar = bar + Reference[Integer.parseInt(zip.substring(p, p + 1))];
 	}
@@ -96,15 +103,34 @@ public class Barcode implements Comparable<Barcode>{
     //converts a barcode into a zip string
     public static String toZip(String code){
 	String bar = "";
-	
+	boolean matched = false;
+
+	if(code.length() != 32){
+	    throw new IllegalArgumentException("Barcode is wrong length");
+	}
+	if((code.charAt(0) != '|') || (code.charAt(31) != '|')){
+	    throw new IllegalArgumentException("Barcode has bad edges");
+	}
+	//for(int p = 0; p < 32; p++){
+	//  if((code.charAt(p) != '|') || (code.charAt(p) != ':')){
+	//	throw new IllegalArgumentException("Barcode has bad characters");
+	//  }
+	// }
+			
 	for(int p = 1; p < 26; p = p + 5){
 	    for(int i = 0; i < 10; i++){
 		if(code.substring(p, p + 5).equals(Reference[i])){
 		    bar = bar + i;
+		    matched = true;
 		}
-		
+
+		if(!(matched)){
+		    throw new IllegalArgumentException("Barcode does not match any ints");
+		}
 	    }
 	}
+
+	checkDigitChecker(bar);
 
 	return bar;
     }
@@ -114,9 +140,9 @@ public class Barcode implements Comparable<Barcode>{
     //prints out a barcode
     public java.lang.String toString(){
 
-	System.out.println(zip + "  " + toCode(zip));
+	System.out.println(zip + checkSum(zip) + "  " + toCode(zip));
 
-	return zip + "  " + toCode(zip);
+	return zip + checkSum(zip) + "  " + toCode(zip);
     }
     
 
@@ -144,6 +170,7 @@ public class Barcode implements Comparable<Barcode>{
     //MAIN
 
     public static void main(String[]args){
+	/*
 	Barcode barcode1 = new Barcode("01234");
 
 	barcode1.toString();
@@ -171,6 +198,12 @@ public class Barcode implements Comparable<Barcode>{
 
 	System.out.println(barcode2.compareTo(barcode2));
 	System.out.println(barcode4.compareTo(barcode3));
+	*/
+
+	Barcode barcode1 = new Barcode("12345");
+	barcode1.toString();
+	System.out.println(toCode("12345"));
+	System.out.println(toZip(toCode("12345")));
     }
     
 }
