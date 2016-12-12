@@ -103,7 +103,7 @@ public class Barcode implements Comparable<Barcode>{
     //converts a barcode into a zip string
     public static String toZip(String code){
 	String bar = "";
-	boolean matched = false;
+	boolean matched = true;
 
 	if(code.length() != 32){
 	    throw new IllegalArgumentException("Barcode is wrong length");
@@ -111,23 +111,34 @@ public class Barcode implements Comparable<Barcode>{
 	if((code.charAt(0) != '|') || (code.charAt(31) != '|')){
 	    throw new IllegalArgumentException("Barcode has bad edges");
 	}
-	//for(int p = 0; p < 32; p++){
-	//  if((code.charAt(p) != '|') || (code.charAt(p) != ':')){
-	//	throw new IllegalArgumentException("Barcode has bad characters");
-	//  }
-	// }
+	for(int p = 0; p < 32; p++){
+	    if((code.charAt(p) != '|') && (code.charAt(p) != ':')){
+		System.out.println(code.charAt(p));
+		throw new IllegalArgumentException("Barcode has bad characters");
+	    }
+	}
 			
 	for(int p = 1; p < 26; p = p + 5){
 	    for(int i = 0; i < 10; i++){
+
+		System.out.println(code.substring(p, p+5));
+		
 		if(code.substring(p, p + 5).equals(Reference[i])){
 		    bar = bar + i;
+		    System.out.println(bar);
+		    matched = false;
+		    i = 10;
+		}
+		else{
 		    matched = true;
 		}
 
-		if(!(matched)){
-		    throw new IllegalArgumentException("Barcode does not match any ints");
-		}
 	    }
+
+	}
+
+	if(matched){
+	    throw new IllegalArgumentException("Barcode does not match any ints");
 	}
 
 	checkDigitChecker(bar);
@@ -203,6 +214,7 @@ public class Barcode implements Comparable<Barcode>{
 	Barcode barcode1 = new Barcode("12345");
 	barcode1.toString();
 	System.out.println(toCode("12345"));
+	//System.out.println(toZip(""));
 	System.out.println(toZip(toCode("12345")));
     }
     
