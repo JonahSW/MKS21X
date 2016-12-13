@@ -47,7 +47,7 @@ public class Barcode implements Comparable<Barcode>{
     //checkDigitChecker returns true if the zip and checkdigit match
     private static boolean checkDigitChecker(String code){
         
-	if(sumDigit(code.substring(0, 6)) == Integer.parseInt(code.substring(5, 6))){
+	if(sumDigit(code.substring(0, 5)) == Integer.parseInt(code.substring(5, 6))){
 	    return true;
 	}
 
@@ -100,7 +100,7 @@ public class Barcode implements Comparable<Barcode>{
 	return bar;
     }
 
-    //converts a barcode into a zip string
+    //converts a barcode into a zip string, including the checkDigit
     public static String toZip(String code){
 	String bar = "";
 	boolean matched = true;
@@ -117,37 +117,41 @@ public class Barcode implements Comparable<Barcode>{
 		throw new IllegalArgumentException("Barcode has bad characters");
 	    }
 	}
-			
+
+	//section of toZip that actually creates the zip to be printed out
 	for(int p = 1; p < 26; p = p + 5){
 	    for(int i = 0; i < 10; i++){
-
-		System.out.println(code.substring(p, p+5));
-		
 		if(code.substring(p, p + 5).equals(Reference[i])){
 		    bar = bar + i;
-		    System.out.println(bar);
 		    matched = false;
 		    i = 10;
 		}
 		else{
 		    matched = true;
 		}
-
 	    }
-
 	}
 
 	if(matched){
 	    throw new IllegalArgumentException("Barcode does not match any ints");
 	}
 
-	checkDigitChecker(bar);
+	int s = 0;
 
-	return bar;
-    }
+	for(int i = 0; i < 10; i++){
+	    if(code.substring(26, 31).equals(Reference[i])){
+		i = 10;
+		s = i;
+	    }
+	}
+		
+	    checkDigitChecker(bar + s);
 
-    //postcondition: format zip + check digit + Barcode 
-    //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"
+	    return bar;
+	}
+
+	//postcondition: format zip + check digit + Barcode 
+	//ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"
     //prints out a barcode
     public java.lang.String toString(){
 
@@ -216,6 +220,9 @@ public class Barcode implements Comparable<Barcode>{
 	System.out.println(toCode("12345"));
 	//System.out.println(toZip(""));
 	System.out.println(toZip(toCode("12345")));
+	System.out.println(toZip("|:::||::|:|:::||::|:|:::||:::|||"));
+	System.out.println(toZip(toCode("93832")));
+
     }
     
 }
