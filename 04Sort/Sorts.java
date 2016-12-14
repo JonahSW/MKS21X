@@ -31,6 +31,22 @@ public class Sorts{
 	    data[i] = min;
 	}
     }
+
+    public static void insertionSort(int[] data){
+	int temp;
+	int len = data.length;
+	int check;
+	int pos;
+
+	for(int p = 1; p < len; p++){
+	    check = data[p];
+	    for(int i = p; p > 0; p--){
+		if(check < data[i]){
+		    temp = data
+		}
+	    }
+	}
+    }
 	
 
     public static void main(String[]args){
