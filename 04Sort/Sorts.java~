@@ -1,0 +1,41 @@
+public class Sorts{
+
+    public static String name(){
+	return "09.Sachs-Wetstone.Jonah";
+    }
+
+    
+    /**Selection sort of an int array. 
+     *Upon completion, the elements of the array will be in increasing order.
+     *@param data  the elements to be sorted.
+     */
+    public static void selectionSort(int[] data){
+	int len = data.length;
+	int min = data[0];
+	int temp = 0;
+	int pos = 0;
+
+	for(int i = 1; i < len; i++){
+	    for(int p = i; p < len; p++){
+		if(data[p] < min){
+		    min = data[p];
+		    pos = p;
+		}
+	    }
+
+	    temp = data[0];
+	    data[0] = min;
+	    data[pos] = temp;
+	}
+    }
+
+    public static void main(String[]args){
+	int[] test = {1, 23, 54, 6, 56, 4, 3, 246, 456, 446, 23, 34, 2, 89, 3};
+
+	System.out.println(test.toString);
+	selectionSort(test);
+	System.out.println(test);
+    }
+
+    
+}
