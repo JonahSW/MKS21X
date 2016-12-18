@@ -1,3 +1,5 @@
+import java.util. *;
+
 public class Barcode implements Comparable<Barcode>{
     // instance variables
     private String zip;
@@ -5,7 +7,7 @@ public class Barcode implements Comparable<Barcode>{
     public static String[] Reference = {"||:::", ":::||", "::|:|", "::||:", ":|::|", ":|:|:", ":||::", "|:::|", "|::|:", "|:|::"};
     
     // constructors
-    //precondtion: _zip.length() = 5 and zip contains only digits.
+    //mx/precondtion: _zip.length() = 5 and zip contains only digits.
     //postcondition: throws a runtime exception zip is not the correct length
     //or zip contains a non digit
     //_zip and _checkDigit are initialized.
@@ -47,7 +49,7 @@ public class Barcode implements Comparable<Barcode>{
     //checkDigitChecker returns true if the zip and checkdigit match
     private static boolean checkDigitChecker(String code){
         
-	if(sumDigit(code.substring(0, 5)) == Integer.parseInt(code.substring(5, 6))){
+	if((sumDigit(code.substring(0, 5)) % 10) == Integer.parseInt(code.substring(5, 6))){
 	    return true;
 	}
 
@@ -136,16 +138,21 @@ public class Barcode implements Comparable<Barcode>{
 	    throw new IllegalArgumentException("Barcode does not match any ints");
 	}
 
-	int s = 0;
+	int s = -1;
 
 	for(int i = 0; i < 10; i++){
 	    if(code.substring(26, 31).equals(Reference[i])){
-		i = 10;
 		s = i;
+		//System.out.println(s);
+		i = 10;
 	    }
 	}
 		
-	    checkDigitChecker(bar + s);
+	if(!(checkDigitChecker(bar + s))){
+	    //System.out.println(bar + s);
+	    throw new IllegalArgumentException("checkSum of barcode does not match");
+	}
+	//System.out.println(checkDigitChecker(bar + s));
 
 	    return bar;
 	}
@@ -185,12 +192,12 @@ public class Barcode implements Comparable<Barcode>{
     //MAIN
 
     public static void main(String[]args){
-	/*
-	Barcode barcode1 = new Barcode("01234");
+	
+	Barcode barcode6 = new Barcode("01234");
 
-	barcode1.toString();
-	System.out.println(toZip(toCode(barcode1.zip())));
-	System.out.println(toCode(barcode1.zip()).length());
+	barcode6.toString();
+	System.out.println(toZip(toCode(barcode6.zip())));
+	System.out.println(toCode(barcode6.zip()).length());
 	System.out.println("___________________________________");
 
 	Barcode barcode2 = new Barcode("54321");
@@ -213,15 +220,28 @@ public class Barcode implements Comparable<Barcode>{
 
 	System.out.println(barcode2.compareTo(barcode2));
 	System.out.println(barcode4.compareTo(barcode3));
-	*/
+	
+	System.out.println("___________________________________");
 
+	//EXCEPTION TESTING
+	System.out.println(Arrays.toString(Reference));
 	Barcode barcode1 = new Barcode("12345");
+	//Barcode barcode7 = new Barcode("162o02");
 	barcode1.toString();
 	System.out.println(toCode("12345"));
 	//System.out.println(toZip(""));
 	System.out.println(toZip(toCode("12345")));
-	System.out.println(toZip("|:::||::|:|:::||::|:|:::||:::|||"));
-	System.out.println(toZip(toCode("93832")));
+
+	//System.out.println(toZip(toCode("1232o")));
+	System.out.println(toZip(toCode("12344")));
+	
+	System.out.println(toZip(toCode("00000")));
+	
+	System.out.println(toZip(toCode("00001")));
+	
+	System.out.println(toZip("|:::||::|:|:::||::|:|:::||:|:|:|"));
+	//System.out.println(toZip("|::||:::|:|:::||::|:|:::||::||:|"));
+	
 
     }
     
