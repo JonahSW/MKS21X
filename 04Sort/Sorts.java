@@ -49,15 +49,19 @@ public class Sorts{
 	int temp;
 	int len = data.length;
 	int check;
-	int pos;
 
 	for(int p = 1; p < len; p++){
-	    check = data[p];
 	    for(int i = p; i > 0; i--){
-		if(check < data[i]){
-		    temp = data[0];
+		if(data[i] < data[i - 1]){
+		    check = data[i];
+		    temp = check;
+		    data[i] = data[i - 1];
+		    data[i - 1] = temp;
 		}
 	    }
+	    //System.out.println("**");
+	    //System.out.println(Arrays.toString(data));
+	    //System.out.println("**");
 	}
     }
 
@@ -65,20 +69,20 @@ public class Sorts{
     public static void bubbleSort(int[] data){
 	int len = data.length;
 	int temp = 0;
-	int counter = 0;
+	//int counter;
 	
-	for(int p = 0; p < len - 1; p++){
-	    for(int i = 0; i < len - 1 - p; i++){
-		if(data[p] < data[p + 1]){
-		    temp = data[p];
-		    data[p] = data[p + 1];
-		    data[p + 1] = temp;
-		    counter++;
+	for(int p = 0; p < len ; p++){
+	    for(int i = 0; i < len - p - 1; i++){
+		if(data[i] > data[i + 1]){
+		    temp = data[i];
+		    data[i] = data[i + 1];
+		    data[i + 1] = temp;
+		    //counter++;
 		}
 	    }
-	    if(counter == 0){
-		return;
-	    }
+	    //if(counter == 0){
+	    //	return;
+	    //}
 	}
     }
     
@@ -88,6 +92,14 @@ public class Sorts{
 
 	//SELECTION SORT TESTS
 	/*
+	int[] test7 = {};
+
+	System.out.println(Arrays.toString(test7));
+	selectionSort(test7);
+        System.out.println(Arrays.toString(test7));
+
+	System.out.println("=================================================");
+	
 	int[] test4 = {0, 9, 8, 7, 5, 6, 4, 3, 1, 2};
 
 	System.out.println(Arrays.toString(test4));
@@ -137,6 +149,15 @@ public class Sorts{
 
 	//INSERTION SORT TESTS
 
+	/*
+	int[] test7 = {};
+
+	System.out.println(Arrays.toString(test7));
+	insertionSort(test7);
+        System.out.println(Arrays.toString(test7));
+
+	System.out.println("=================================================");
+	
 	int[] test4 = {0, 9, 8, 7, 5, 6, 4, 3, 1, 2};
 
 	System.out.println(Arrays.toString(test4));
@@ -153,6 +174,7 @@ public class Sorts{
 
 	System.out.println("=================================================");
 
+	
 	int[] test = {100, 23, 54, 6, 56, 4, 3, 246, 456, 446, 23, 34, 2, 89, 30};
 
 	System.out.println(Arrays.toString(test));
@@ -182,6 +204,67 @@ public class Sorts{
 	System.out.println(Arrays.toString(test3));
 	insertionSort(test3);
         System.out.println(Arrays.toString(test3));
+	*/
+
+	//BUBBLE SORT
+
+	///*
+	int[] test7 = {};
+
+	System.out.println(Arrays.toString(test7));
+	selectionSort(test7);
+        System.out.println(Arrays.toString(test7));
+
+	System.out.println("=================================================");
+
+	int[] test4 = {0, 9, 8, 7, 5, 6, 4, 3, 1, 2};
+
+	System.out.println(Arrays.toString(test4));
+	bubbleSort(test4);
+        System.out.println(Arrays.toString(test4));
+
+	System.out.println("=================================================");
+
+	int[] test5 = {9, 6, 2, 0, 7, 5, 4, 1, 8, 3};
+
+	System.out.println(Arrays.toString(test5));
+	bubbleSort(test5);
+        System.out.println(Arrays.toString(test5));
+
+	System.out.println("=================================================");
+
+	
+	int[] test = {100, 23, 54, 6, 56, 4, 3, 246, 456, 446, 23, 34, 2, 89, 30};
+
+	System.out.println(Arrays.toString(test));
+	bubbleSort(test);
+        System.out.println(Arrays.toString(test));
+
+	System.out.println("=================================================");
+	
+	int[] test1 = {100, 0};
+
+	System.out.println(Arrays.toString(test1));
+	bubbleSort(test1);
+        System.out.println(Arrays.toString(test1));
+
+	System.out.println("=================================================");
+
+	int[]test2 = {10, 3, 544, -8, 4566, 46, -34, 0, -4656, 0, -23, 34, 2, -89, 3};
+
+	System.out.println(Arrays.toString(test2));
+	bubbleSort(test2);
+        System.out.println(Arrays.toString(test2));
+
+	System.out.println("=================================================");
+	
+	int[] test3 = {100, 0, -100};
+
+	System.out.println(Arrays.toString(test3));
+	bubbleSort(test3);
+        System.out.println(Arrays.toString(test3));
+	//*/
+
     }
 
     
